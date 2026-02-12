@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09D67290910FE4DD735F9FC9 /* CalendarExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9BE9F7FE35BA0772586D4D /* CalendarExporter.swift */; };
+		2650B04CD71E4308DF5470EA /* AddCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A2AE1AB1E16B27C67E1CA8 /* AddCourseView.swift */; };
 		5C34D77381EA158907A95BC4 /* CourseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F882D951390A4EFC389A4E /* CourseColor.swift */; };
 		63D4DD8F64C08D2AAA66C4F9 /* ScheduleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D0B71133BFA8FBE1A49187 /* ScheduleParser.swift */; };
 		6EFF6F43FF92B47250B1A192 /* TrustAllCerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BFD7A3AD9C3D1BF9C2A5FC /* TrustAllCerts.swift */; };
@@ -23,7 +25,9 @@
 		01B9A9408AACDBF943E4CD09 /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
 		06FD9ABF642466922E724BCA /* MyScheduleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScheduleApp.swift; sourceTree = "<group>"; };
 		09D0B71133BFA8FBE1A49187 /* ScheduleParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleParser.swift; sourceTree = "<group>"; };
+		13A2AE1AB1E16B27C67E1CA8 /* AddCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseView.swift; sourceTree = "<group>"; };
 		28D667B2883BECEFCB030AE5 /* MySchedule.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MySchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E9BE9F7FE35BA0772586D4D /* CalendarExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExporter.swift; sourceTree = "<group>"; };
 		33879AD99D2341E40B13612B /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		34BFD7A3AD9C3D1BF9C2A5FC /* TrustAllCerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustAllCerts.swift; sourceTree = "<group>"; };
 		3FE92D12C8BB48811AE4AF34 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -48,6 +52,7 @@
 		46BC54B583A1EBBB333337FA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2E9BE9F7FE35BA0772586D4D /* CalendarExporter.swift */,
 				09D0B71133BFA8FBE1A49187 /* ScheduleParser.swift */,
 				34BFD7A3AD9C3D1BF9C2A5FC /* TrustAllCerts.swift */,
 			);
@@ -65,6 +70,7 @@
 		9C2C66993ED3C397F476311D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				13A2AE1AB1E16B27C67E1CA8 /* AddCourseView.swift */,
 				01B9A9408AACDBF943E4CD09 /* ImportView.swift */,
 				3FE92D12C8BB48811AE4AF34 /* MainTabView.swift */,
 				8D71CD6DCEA10A9CB3B1AD18 /* ProfileView.swift */,
@@ -165,6 +171,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2650B04CD71E4308DF5470EA /* AddCourseView.swift in Sources */,
+				09D67290910FE4DD735F9FC9 /* CalendarExporter.swift in Sources */,
 				CD310C6DA80CDDDDE94F1C8C /* CourseBlockView.swift in Sources */,
 				5C34D77381EA158907A95BC4 /* CourseColor.swift in Sources */,
 				87186D0990E8F79A66851F58 /* ImportView.swift in Sources */,

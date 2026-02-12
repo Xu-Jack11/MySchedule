@@ -7,6 +7,11 @@ struct ScheduleView: View {
     @Query private var configs: [SemesterConfig]
     @State private var currentWeek: Int = 1
     @State private var showImport = false
+    @State private var showAddCourse = false
+    @State private var showExportAlert = false
+    @State private var exportAlertMessage = ""
+    @State private var showShareSheet = false
+    @State private var shareFileURL: URL?
 
     private var config: SemesterConfig? { configs.first }
 
@@ -59,23 +64,44 @@ struct ScheduleView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 16) {
-                        Button(action: { }) {
+                        Button(action: { showAddCourse = true }) {
                             Image(systemName: "plus")
                         }
                         Button(action: { showImport = true }) {
                             Image(systemName: "square.and.arrow.down")
                         }
-                        Button(action: { }) {
+                        Menu {
+                            Button {
+                                exportToCalendar()
+                            } label: {
+                                Label("导入到日历", systemImage: "calendar.badge.plus")
+                            }
+                            Button {
+                                exportToICalFile()
+                            } label: {
+                                Label("导出为iCal文件", systemImage: "doc.badge.arrow.up")
+                            }
+                        } label: {
                             Image(systemName: "square.and.arrow.up")
-                        }
-                        Button(action: { }) {
-                            Image(systemName: "ellipsis")
                         }
                     }
                 }
             }
             .sheet(isPresented: $showImport) {
                 ImportView()
+            }
+            .sheet(isPresented: $showAddCourse) {
+                AddCourseView()
+            }
+            .sheet(isPresented: $showShareSheet) {
+                if let url = shareFileURL {
+                    ShareSheet(items: [url])
+                }
+            }
+            .alert("提示", isPresented: $showExportAlert) {
+                Button("确定") { }
+            } message: {
+                Text(exportAlertMessage)
             }
             .onAppear {
                 if config != nil {
@@ -257,6 +283,66 @@ struct ScheduleView: View {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.date(from: "2026-02-16") ?? Date()
     }
+
+    // MARK: - 导入到系统日历
+    private func exportToCalendar() {
+        guard let config = config else {
+            exportAlertMessage = "请先设置学期信息"
+            showExportAlert = true
+            return
+        }
+
+        CalendarExporter.exportToCalendar(
+            schedules: allSchedules,
+            semesterStart: config.startDate
+        ) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let count):
+                    exportAlertMessage = "成功导入 \(count) 个日历事件"
+                case .failure(let error):
+                    exportAlertMessage = "导入失败：\(error.localizedDescription)"
+                }
+                showExportAlert = true
+            }
+        }
+    }
+
+    // MARK: - 导出为iCal文件
+    private func exportToICalFile() {
+        guard let config = config else {
+            exportAlertMessage = "请先设置学期信息"
+            showExportAlert = true
+            return
+        }
+
+        let icalString = CalendarExporter.generateICalString(
+            schedules: allSchedules,
+            config: config
+        )
+
+        let tempURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent("MySchedule.ics")
+        do {
+            try icalString.write(to: tempURL, atomically: true, encoding: .utf8)
+            shareFileURL = tempURL
+            showShareSheet = true
+        } catch {
+            exportAlertMessage = "导出失败：\(error.localizedDescription)"
+            showExportAlert = true
+        }
+    }
+}
+
+// MARK: - 系统分享面板
+struct ShareSheet: UIViewControllerRepresentable {
+    let items: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: items, applicationActivities: nil)
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) { }
 }
 
 #Preview {
