@@ -8,20 +8,55 @@ struct ImportView: View {
     @State private var alertMessage = ""
     @State private var isImporting = false
     @State private var webView: WKWebView?
+    @State private var urlText = "https://ijw.hzcu.edu.cn"
+    @State private var currentURLString = "https://ijw.hzcu.edu.cn"
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                Text("请登录教务系统并切换到课程表页面，然后点击下方「确认导入」")
-                    .font(.caption)
+                // 地址栏
+                HStack(spacing: 8) {
+                    Image(systemName: "lock.fill")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+
+                    TextField("输入教务系统地址", text: $urlText)
+                        .font(.caption)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .keyboardType(.URL)
+                        .onSubmit {
+                            navigateToURL()
+                        }
+
+                    Button {
+                        navigateToURL()
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.caption)
+                            .foregroundColor(.blue)
+                    }
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(Color(.systemGray6))
+                .cornerRadius(8)
+                .padding(.horizontal)
+                .padding(.top, 8)
+
+                Text("登录教务系统并切换到课程表页面，然后点击「确认导入」")
+                    .font(.caption2)
                     .foregroundColor(.secondary)
-                    .padding(.horizontal)
-                    .padding(.top, 8)
+                    .padding(.top, 4)
                     .padding(.bottom, 4)
 
                 ImportWebView(
-                    url: URL(string: "https://ijw.hzcu.edu.cn")!,
-                    webView: $webView
+                    url: URL(string: urlText) ?? URL(string: "https://ijw.hzcu.edu.cn")!,
+                    webView: $webView,
+                    onURLChange: { newURL in
+                        currentURLString = newURL
+                        urlText = newURL
+                    }
                 )
 
                 // 底部确认按钮
@@ -60,6 +95,16 @@ struct ImportView: View {
                 Text(alertMessage)
             }
         }
+    }
+
+    private func navigateToURL() {
+        var input = urlText.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !input.hasPrefix("http://") && !input.hasPrefix("https://") {
+            input = "https://" + input
+        }
+        guard let url = URL(string: input) else { return }
+        urlText = input
+        webView?.load(URLRequest(url: url))
     }
 
     private func performImport() {
@@ -239,6 +284,7 @@ struct ParsedCourse {
 struct ImportWebView: UIViewRepresentable {
     let url: URL
     @Binding var webView: WKWebView?
+    var onURLChange: ((String) -> Void)?
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -283,6 +329,13 @@ struct ImportWebView: UIViewRepresentable {
                 completionHandler(.useCredential, URLCredential(trust: serverTrust))
             } else {
                 completionHandler(.performDefaultHandling, nil)
+            }
+        }
+
+        // 页面加载完成时更新地址栏
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            if let url = webView.url?.absoluteString {
+                parent.onURLChange?(url)
             }
         }
 
