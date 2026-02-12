@@ -1,9 +1,11 @@
 import SwiftUI
+import SwiftData
 import WebKit
 
 struct ImportView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @Query private var configs: [SemesterConfig]
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var isImporting = false
@@ -124,9 +126,9 @@ struct ImportView: View {
                     let debugDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                     try? jsonString.write(to: debugDir.appendingPathComponent("debug_js.json"), atomically: true, encoding: .utf8)
 
-                    let courses = ScheduleParser.parseFromJS(jsonString: jsonString)
+                    let (courses, totalSections) = ScheduleParser.parseFromJS(jsonString: jsonString)
                     if !courses.isEmpty {
-                        importCourses(courses)
+                        importCourses(courses, tableSections: totalSections)
                         isImporting = false
                         alertMessage = "成功导入 \(courses.count) 条课程安排"
                         showAlert = true
@@ -231,7 +233,7 @@ struct ImportView: View {
         }
     }
 
-    private func importCourses(_ data: [ParsedCourse]) {
+    private func importCourses(_ data: [ParsedCourse], tableSections: Int = 0) {
         var colorIndex = 0
         var courseMap: [String: Course] = [:]
 
@@ -263,7 +265,35 @@ struct ImportView: View {
             modelContext.insert(schedule)
         }
 
+        // 根据课表表格总节次数更新每日节数
+        if tableSections > 0, let config = configs.first {
+            config.sectionsPerDay = tableSections
+            // 确保sectionTimes数组覆盖所有节次
+            while config.sectionTimes.count < tableSections {
+                let lastTime = config.sectionTimes.last
+                let newStart = addMinutes(to: lastTime?.endTime ?? "08:00", minutes: 10)
+                let newEnd = addMinutes(to: newStart, minutes: 45)
+                config.sectionTimes.append(SectionTime(
+                    section: config.sectionTimes.count + 1,
+                    startTime: newStart,
+                    endTime: newEnd
+                ))
+            }
+            // 如果表格节次少于当前配置，也同步缩减
+            if tableSections < config.sectionTimes.count {
+                config.sectionTimes = Array(config.sectionTimes.prefix(tableSections))
+            }
+        }
+
         try? modelContext.save()
+    }
+
+    private func addMinutes(to time: String, minutes: Int) -> String {
+        let parts = time.split(separator: ":").compactMap { Int($0) }
+        guard parts.count == 2 else { return time }
+        var totalMinutes = parts[0] * 60 + parts[1] + minutes
+        totalMinutes = min(totalMinutes, 23 * 60 + 59)
+        return String(format: "%02d:%02d", totalMinutes / 60, totalMinutes % 60)
     }
 }
 

@@ -42,8 +42,11 @@ struct ScheduleView: View {
     }
 
     private let dayNames = ["一", "二", "三", "四", "五", "六", "日"]
-    private let sectionCount = 12
     private let sectionHeight: CGFloat = 60
+
+    private var sectionCount: Int {
+        config?.sectionsPerDay ?? 12
+    }
 
     var body: some View {
         NavigationStack {

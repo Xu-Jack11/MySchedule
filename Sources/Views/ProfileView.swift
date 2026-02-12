@@ -46,6 +46,17 @@ struct ProfileView: View {
                             Text("\(config.totalWeeks) 周")
                                 .foregroundColor(.secondary)
                         }
+
+                        NavigationLink {
+                            SectionTimeSettingView()
+                        } label: {
+                            HStack {
+                                Text("上课时间")
+                                Spacer()
+                                Text("\(config.sectionsPerDay) 节/天")
+                                    .foregroundColor(.secondary)
+                            }
+                        }
                     } else {
                         Text("未设置学期信息")
                             .foregroundColor(.secondary)

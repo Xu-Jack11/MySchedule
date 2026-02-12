@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		09D67290910FE4DD735F9FC9 /* CalendarExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9BE9F7FE35BA0772586D4D /* CalendarExporter.swift */; };
 		2650B04CD71E4308DF5470EA /* AddCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A2AE1AB1E16B27C67E1CA8 /* AddCourseView.swift */; };
+		4A1BFF7F32885C95D19E43A9 /* SectionTimeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40331EF31ADFCFA3AEA3E62 /* SectionTimeSettingView.swift */; };
 		5C34D77381EA158907A95BC4 /* CourseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F882D951390A4EFC389A4E /* CourseColor.swift */; };
 		63D4DD8F64C08D2AAA66C4F9 /* ScheduleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D0B71133BFA8FBE1A49187 /* ScheduleParser.swift */; };
 		6EFF6F43FF92B47250B1A192 /* TrustAllCerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BFD7A3AD9C3D1BF9C2A5FC /* TrustAllCerts.swift */; };
@@ -35,6 +36,7 @@
 		8D71CD6DCEA10A9CB3B1AD18 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		AD7AF60396DD615DF636415D /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		BB62694685BB13EC933FEE95 /* CourseBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBlockView.swift; sourceTree = "<group>"; };
+		C40331EF31ADFCFA3AEA3E62 /* SectionTimeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTimeSettingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -75,6 +77,7 @@
 				3FE92D12C8BB48811AE4AF34 /* MainTabView.swift */,
 				8D71CD6DCEA10A9CB3B1AD18 /* ProfileView.swift */,
 				33879AD99D2341E40B13612B /* ScheduleView.swift */,
+				C40331EF31ADFCFA3AEA3E62 /* SectionTimeSettingView.swift */,
 				7FCE536AC67BC9414A6C3B0C /* Components */,
 			);
 			path = Views;
@@ -176,6 +179,7 @@
 				AABC4167542AFBDF0BF1799E /* ProfileView.swift in Sources */,
 				63D4DD8F64C08D2AAA66C4F9 /* ScheduleParser.swift in Sources */,
 				DF08B19D39093E1EFE076E52 /* ScheduleView.swift in Sources */,
+				4A1BFF7F32885C95D19E43A9 /* SectionTimeSettingView.swift in Sources */,
 				6EFF6F43FF92B47250B1A192 /* TrustAllCerts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

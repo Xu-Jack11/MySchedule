@@ -40,10 +40,24 @@ struct ScheduleParser {
     }
 
     /// 从JavaScript提取的JSON字符串解析课程
-    static func parseFromJS(jsonString: String) -> [ParsedCourse] {
+    /// 返回 (课程列表, 表格总节次数)
+    static func parseFromJS(jsonString: String) -> ([ParsedCourse], Int) {
         guard let data = jsonString.data(using: .utf8),
-              let array = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] else {
-            return []
+              let json = try? JSONSerialization.jsonObject(with: data) else {
+            return ([], 0)
+        }
+
+        // 支持新格式 {courses: [...], totalSections: N} 和旧格式 [...]
+        let array: [[String: Any]]
+        var totalSections = 0
+
+        if let obj = json as? [String: Any] {
+            array = obj["courses"] as? [[String: Any]] ?? []
+            totalSections = obj["totalSections"] as? Int ?? 0
+        } else if let arr = json as? [[String: Any]] {
+            array = arr
+        } else {
+            return ([], 0)
         }
 
         var results: [ParsedCourse] = []
@@ -68,7 +82,7 @@ struct ScheduleParser {
                 ))
             }
         }
-        return results
+        return (results, totalSections)
     }
 
     /// 解析周次字符串
@@ -175,11 +189,24 @@ struct ScheduleParser {
     static let extractionJS = """
     (function() {
         var results = [];
+        var totalSections = 0;
         
         // 方法1: 从表格视图(#table1)的td中提取
         // td的id格式: "{dayOfWeek}-{section}", 如 "3-1" = 星期三第1节
         var table = document.getElementById('kbgrid_table_0');
         if (table) {
+            // 从所有td.td_wrap中获取表格的总节次数
+            var allCells = table.querySelectorAll('td.td_wrap');
+            for (var i = 0; i < allCells.length; i++) {
+                var cid = allCells[i].getAttribute('id');
+                if (!cid) continue;
+                var cp = cid.split('-');
+                if (cp.length === 2) {
+                    var sec = parseInt(cp[1]);
+                    if (!isNaN(sec) && sec > totalSections) totalSections = sec;
+                }
+            }
+            
             var cells = table.querySelectorAll('td.td_wrap');
             for (var i = 0; i < cells.length; i++) {
                 var cell = cells[i];
@@ -334,7 +361,7 @@ struct ScheduleParser {
             });
         }
         
-        return JSON.stringify(results);
+        return JSON.stringify({courses: results, totalSections: totalSections});
     })();
     """;
 }
