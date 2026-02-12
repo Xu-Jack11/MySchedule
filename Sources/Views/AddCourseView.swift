@@ -4,6 +4,7 @@ import SwiftData
 struct AddCourseView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @Query(filter: #Predicate<SemesterConfig> { $0.isActive }) private var activeConfigs: [SemesterConfig]
 
     @State private var courseName = ""
     @State private var teacher = ""
@@ -15,8 +16,12 @@ struct AddCourseView: View {
     @State private var endWeek = 16
     @State private var weekType = 0  // 0=每周, 1=单周, 2=双周
 
+    private var config: SemesterConfig? { activeConfigs.first }
     private let dayNames = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
     private let weekTypes = ["每周", "单周", "双周"]
+
+    private var maxSections: Int { config?.sectionsPerDay ?? 12 }
+    private var maxWeeks: Int { config?.totalWeeks ?? 20 }
 
     var body: some View {
         NavigationStack {
@@ -35,13 +40,13 @@ struct AddCourseView: View {
                     }
 
                     Picker("开始节次", selection: $startSection) {
-                        ForEach(1...12, id: \.self) { section in
+                        ForEach(1...maxSections, id: \.self) { section in
                             Text("第\(section)节").tag(section)
                         }
                     }
 
                     Picker("结束节次", selection: $endSection) {
-                        ForEach(startSection...12, id: \.self) { section in
+                        ForEach(startSection...maxSections, id: \.self) { section in
                             Text("第\(section)节").tag(section)
                         }
                     }
@@ -49,13 +54,13 @@ struct AddCourseView: View {
 
                 Section("周次") {
                     Picker("开始周", selection: $startWeek) {
-                        ForEach(1...20, id: \.self) { week in
+                        ForEach(1...maxWeeks, id: \.self) { week in
                             Text("第\(week)周").tag(week)
                         }
                     }
 
                     Picker("结束周", selection: $endWeek) {
-                        ForEach(startWeek...20, id: \.self) { week in
+                        ForEach(startWeek...maxWeeks, id: \.self) { week in
                             Text("第\(week)周").tag(week)
                         }
                     }
@@ -96,11 +101,12 @@ struct AddCourseView: View {
     }
 
     private func saveCourse() {
-        let colorIndex = (try? modelContext.fetchCount(FetchDescriptor<Course>())) ?? 0
+        let colorIndex = config?.courses.count ?? 0
         let course = Course(
             name: courseName,
             teacher: teacher,
-            colorHex: CourseColor.color(at: colorIndex)
+            colorHex: CourseColor.color(at: colorIndex),
+            semester: config
         )
         modelContext.insert(course)
 
@@ -121,5 +127,5 @@ struct AddCourseView: View {
 
 #Preview {
     AddCourseView()
-        .modelContainer(for: [Course.self, CourseSchedule.self], inMemory: true)
+        .modelContainer(for: [Course.self, CourseSchedule.self, SemesterConfig.self], inMemory: true)
 }

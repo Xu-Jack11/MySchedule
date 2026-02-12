@@ -5,7 +5,7 @@ import WebKit
 struct ImportView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    @Query private var configs: [SemesterConfig]
+    @Query(filter: #Predicate<SemesterConfig> { $0.isActive }) private var activeConfigs: [SemesterConfig]
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var isImporting = false
@@ -234,7 +234,8 @@ struct ImportView: View {
     }
 
     private func importCourses(_ data: [ParsedCourse], tableSections: Int = 0) {
-        var colorIndex = 0
+        guard let config = activeConfigs.first else { return }
+        var colorIndex = config.courses.count
         var courseMap: [String: Course] = [:]
 
         for item in data {
@@ -245,7 +246,8 @@ struct ImportView: View {
                 course = Course(
                     name: item.name,
                     teacher: item.teacher,
-                    colorHex: CourseColor.color(at: colorIndex)
+                    colorHex: CourseColor.color(at: colorIndex),
+                    semester: config
                 )
                 colorIndex += 1
                 courseMap[item.name] = course
@@ -266,9 +268,8 @@ struct ImportView: View {
         }
 
         // 根据课表表格总节次数更新每日节数
-        if tableSections > 0, let config = configs.first {
+        if tableSections > 0 {
             config.sectionsPerDay = tableSections
-            // 确保sectionTimes数组覆盖所有节次
             while config.sectionTimes.count < tableSections {
                 let lastTime = config.sectionTimes.last
                 let newStart = addMinutes(to: lastTime?.endTime ?? "08:00", minutes: 10)
@@ -279,7 +280,6 @@ struct ImportView: View {
                     endTime: newEnd
                 ))
             }
-            // 如果表格节次少于当前配置，也同步缩减
             if tableSections < config.sectionTimes.count {
                 config.sectionTimes = Array(config.sectionTimes.prefix(tableSections))
             }

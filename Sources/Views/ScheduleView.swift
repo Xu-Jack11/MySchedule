@@ -3,8 +3,7 @@ import SwiftData
 
 struct ScheduleView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var courses: [Course]
-    @Query private var configs: [SemesterConfig]
+    @Query(filter: #Predicate<SemesterConfig> { $0.isActive }) private var activeConfigs: [SemesterConfig]
     @State private var currentWeek: Int = 1
     @State private var showImport = false
     @State private var showAddCourse = false
@@ -13,17 +12,16 @@ struct ScheduleView: View {
     @State private var showShareSheet = false
     @State private var shareFileURL: URL?
 
-    private var config: SemesterConfig? { configs.first }
+    private var config: SemesterConfig? { activeConfigs.first }
 
     private var allSchedules: [CourseSchedule] {
-        courses.flatMap { $0.schedules }
+        config?.courses.flatMap { $0.schedules } ?? []
     }
 
     private var totalWeeks: Int {
         config?.totalWeeks ?? 20
     }
 
-    // 计算当前是第几周
     private var calculatedCurrentWeek: Int {
         guard let config = config else { return 1 }
         let calendar = Calendar.current
@@ -33,7 +31,6 @@ struct ScheduleView: View {
         return max(1, min(week, totalWeeks))
     }
 
-    // 获取某周某天的日期
     private func dateForDay(_ dayOfWeek: Int, inWeek week: Int) -> Date {
         guard let config = config else { return Date() }
         let calendar = Calendar.current
@@ -54,14 +51,20 @@ struct ScheduleView: View {
                 headerView
                 weekDayHeader
 
-                // 使用 TabView 实现左右滑动切换周次
-                TabView(selection: $currentWeek) {
-                    ForEach(1...totalWeeks, id: \.self) { week in
-                        weekScheduleContent(week: week)
-                            .tag(week)
+                if totalWeeks > 0 {
+                    TabView(selection: $currentWeek) {
+                        ForEach(1...totalWeeks, id: \.self) { week in
+                            weekScheduleContent(week: week)
+                                .tag(week)
+                        }
                     }
+                    .tabViewStyle(.page(indexDisplayMode: .never))
+                } else {
+                    Spacer()
+                    Text("请先设置学期信息")
+                        .foregroundColor(.secondary)
+                    Spacer()
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -110,15 +113,26 @@ struct ScheduleView: View {
                 if config != nil {
                     currentWeek = calculatedCurrentWeek
                 }
-                if configs.isEmpty {
-                    let defaultConfig = SemesterConfig(
-                        semesterName: "2025-2026学年第二学期",
-                        startDate: semesterStartDate(),
-                        totalWeeks: 20,
-                        sectionsPerDay: 12
-                    )
-                    modelContext.insert(defaultConfig)
-                }
+                ensureDefaultConfig()
+            }
+        }
+    }
+
+    private func ensureDefaultConfig() {
+        if activeConfigs.isEmpty {
+            // 检查是否有任何学期配置
+            let descriptor = FetchDescriptor<SemesterConfig>()
+            let allConfigs = (try? modelContext.fetch(descriptor)) ?? []
+            if allConfigs.isEmpty {
+                let defaultConfig = SemesterConfig(
+                    semesterName: "2025-2026学年第二学期",
+                    startDate: semesterStartDate(),
+                    totalWeeks: 20,
+                    sectionsPerDay: 12,
+                    isActive: true
+                )
+                modelContext.insert(defaultConfig)
+                try? modelContext.save()
             }
         }
     }
@@ -141,6 +155,9 @@ struct ScheduleView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                 HStack(spacing: 8) {
+                    Text(config?.semesterName ?? "")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
                     Text("第\(currentWeek)周")
                         .font(.caption)
                         .foregroundColor(.secondary)
@@ -164,7 +181,6 @@ struct ScheduleView: View {
     // MARK: - 星期栏
     private var weekDayHeader: some View {
         HStack(spacing: 0) {
-            // 左上角显示月份
             Text(monthString())
                 .font(.caption2)
                 .foregroundColor(.secondary)

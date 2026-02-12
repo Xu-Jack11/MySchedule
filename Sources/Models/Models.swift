@@ -8,15 +8,17 @@ final class Course {
     var name: String
     var teacher: String
     var colorHex: String
+    var semester: SemesterConfig?
 
     @Relationship(deleteRule: .cascade, inverse: \CourseSchedule.course)
     var schedules: [CourseSchedule]
 
-    init(name: String, teacher: String = "", colorHex: String = "#4A90D9") {
+    init(name: String, teacher: String = "", colorHex: String = "#4A90D9", semester: SemesterConfig? = nil) {
         self.id = UUID()
         self.name = name
         self.teacher = teacher
         self.colorHex = colorHex
+        self.semester = semester
         self.schedules = []
     }
 }
@@ -65,12 +67,17 @@ final class SemesterConfig {
     var totalWeeks: Int            // 总周数
     var sectionsPerDay: Int        // 每天节数
     var sectionTimes: [SectionTime]  // 每节课的时间
+    var isActive: Bool             // 是否为当前激活学期
+
+    @Relationship(deleteRule: .cascade, inverse: \Course.semester)
+    var courses: [Course]
 
     init(
         semesterName: String = "",
         startDate: Date = Date(),
         totalWeeks: Int = 20,
-        sectionsPerDay: Int = 12
+        sectionsPerDay: Int = 12,
+        isActive: Bool = true
     ) {
         self.id = UUID()
         self.semesterName = semesterName
@@ -78,6 +85,8 @@ final class SemesterConfig {
         self.totalWeeks = totalWeeks
         self.sectionsPerDay = sectionsPerDay
         self.sectionTimes = SectionTime.defaultTimes()
+        self.isActive = isActive
+        self.courses = []
     }
 }
 
