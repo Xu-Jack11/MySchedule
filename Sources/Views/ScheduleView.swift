@@ -11,6 +11,7 @@ struct ScheduleView: View {
     @State private var exportAlertMessage = ""
     @State private var showShareSheet = false
     @State private var shareFileURL: URL?
+    @State private var selectedCourse: Course?
 
     private var config: SemesterConfig? { activeConfigs.first }
 
@@ -108,6 +109,9 @@ struct ScheduleView: View {
                 Button("确定") { }
             } message: {
                 Text(exportAlertMessage)
+            }
+            .sheet(item: $selectedCourse) { course in
+                CourseDetailView(course: course)
             }
             .onAppear {
                 if config != nil {
@@ -256,6 +260,9 @@ struct ScheduleView: View {
                     )
                     .frame(width: dayWidth - 2, height: height - 2)
                     .position(x: x + dayWidth / 2, y: y + height / 2)
+                    .onTapGesture {
+                        selectedCourse = course
+                    }
                 }
             }
         }
