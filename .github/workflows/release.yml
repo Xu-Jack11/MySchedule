@@ -5,12 +5,13 @@ on:
     tags:
       - 'v*'
 
-permissions:
-  contents: write
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  release:
-    name: Create Release
+  archive:
+    name: Archive
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
@@ -21,18 +22,23 @@ jobs:
       - name: Generate Xcode Project
         run: xcodegen generate
 
-      - name: Build Archive
+      - name: Archive
         run: |
           xcodebuild archive \
             -project MySchedule.xcodeproj \
             -scheme MySchedule \
-            -destination 'generic/platform=iOS Simulator' \
             -archivePath build/MySchedule.xcarchive \
+            -destination 'generic/platform=iOS' \
             CODE_SIGNING_ALLOWED=NO \
-            | xcpretty --color
+            | xcpretty --color && exit ${PIPESTATUS[0]}
+
+      - name: Upload Archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: MySchedule.xcarchive
+          path: build/MySchedule.xcarchive
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
-          draft: false
