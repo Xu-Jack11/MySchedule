@@ -18,14 +18,18 @@ iOS 课程表应用，专为大学生设计。支持从正方教务系统导入�
   <img src="Screenshots/schedule.png" alt="课表视图" width="300">
 </p>
 
-## 技术栈
+## 安装
 
-- **SwiftUI** + **SwiftData**
-- iOS 17.0+
-- Xcode 16.0+
-- 项目生成：[XcodeGen](https://github.com/yonaskolb/XcodeGen)
+### 通过 AltStore 安装（推荐）
 
-## 构建
+1. **电脑端**：下载并安装 [AltServer](https://altstore.io/)（支持 macOS / Windows）
+2. **手机端**：通过 AltServer 将 AltStore 安装到 iPhone
+3. **下载 IPA**：从 [Releases](https://github.com/Xu-Jack11/MySchedule/releases) 页面下载最新的 `MySchedule.ipa`
+4. **安装**：在 iPhone 上用 AltStore 打开下载的 .ipa 文件，或通过 AltStore → My Apps → + 导入
+
+> ⚠️ AltStore 使用免费 Apple ID 签名，有效期 7 天。请保持 AltServer 在电脑上运行并与手机处于同一 WiFi 下，AltStore 会自动刷新签名。
+
+### 从源码构建
 
 ```bash
 # 安装 XcodeGen（如未安装）
@@ -37,7 +41,18 @@ xcodegen generate
 
 # 打开项目
 open MySchedule.xcodeproj
+
+# 或使用 Makefile
+make build      # 编译
+make ipa        # 导出 IPA
 ```
+
+## 技术栈
+
+- **SwiftUI** + **SwiftData**
+- iOS 17.0+
+- Xcode 16.0+
+- 项目生成：[XcodeGen](https://github.com/yonaskolb/XcodeGen)
 
 ## 项目结构
 
