@@ -10,8 +10,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  archive:
-    name: Archive
+  build-ipa:
+    name: Build IPA
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
@@ -29,16 +29,30 @@ jobs:
             -scheme MySchedule \
             -archivePath build/MySchedule.xcarchive \
             -destination 'generic/platform=iOS' \
+            -configuration Release \
             CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
             | xcpretty --color && exit ${PIPESTATUS[0]}
 
-      - name: Upload Archive
+      - name: Export IPA
+        run: |
+          mkdir -p build/ipa
+          cd build/MySchedule.xcarchive/Products/Applications
+          mkdir Payload
+          mv MySchedule.app Payload/
+          zip -r ../../../ipa/MySchedule.ipa Payload
+          cd ../../../..
+          ls -lh build/ipa/
+
+      - name: Upload IPA Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: MySchedule.xcarchive
-          path: build/MySchedule.xcarchive
+          name: MySchedule.ipa
+          path: build/ipa/MySchedule.ipa
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
+          files: build/ipa/MySchedule.ipa
