@@ -12,23 +12,59 @@
 		2650B04CD71E4308DF5470EA /* AddCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A2AE1AB1E16B27C67E1CA8 /* AddCourseView.swift */; };
 		4A1BFF7F32885C95D19E43A9 /* SectionTimeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40331EF31ADFCFA3AEA3E62 /* SectionTimeSettingView.swift */; };
 		5C34D77381EA158907A95BC4 /* CourseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F882D951390A4EFC389A4E /* CourseColor.swift */; };
+		5E196B3BA48502B81BA5EEC0 /* SharedModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C463F40566C697DFE005331 /* SharedModelContainer.swift */; };
+		624B4D4A1C88B55A1FD991DD /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7AF60396DD615DF636415D /* Models.swift */; };
 		63D4DD8F64C08D2AAA66C4F9 /* ScheduleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D0B71133BFA8FBE1A49187 /* ScheduleParser.swift */; };
 		6EFF6F43FF92B47250B1A192 /* TrustAllCerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BFD7A3AD9C3D1BF9C2A5FC /* TrustAllCerts.swift */; };
+		7F28C48922FBF075B24BABAF /* CourseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F882D951390A4EFC389A4E /* CourseColor.swift */; };
 		87186D0990E8F79A66851F58 /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9A9408AACDBF943E4CD09 /* ImportView.swift */; };
+		903E938E71FFEB3A3FC4B759 /* MyScheduleWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E25246EDC3E0B53CD153E596 /* MyScheduleWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AABC4167542AFBDF0BF1799E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D71CD6DCEA10A9CB3B1AD18 /* ProfileView.swift */; };
 		AF935D9AD2FC67066114E9CC /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE92D12C8BB48811AE4AF34 /* MainTabView.swift */; };
+		B7D677CCA9F40219C3C7C95A /* WidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB663427472BAF5DC109DF19 /* WidgetViews.swift */; };
 		C1D2D915A86D1F9C7705C1DB /* MyScheduleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FD9ABF642466922E724BCA /* MyScheduleApp.swift */; };
 		C8E94D1631CF2732AAA021DE /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7AF60396DD615DF636415D /* Models.swift */; };
+		C914AFFF89918A8CC4048ECC /* MyScheduleWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBBA20C10F2085CC10EE51A /* MyScheduleWidgetBundle.swift */; };
 		CD310C6DA80CDDDDE94F1C8C /* CourseBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB62694685BB13EC933FEE95 /* CourseBlockView.swift */; };
+		CD3F8CA5C5F85508A2EE57D8 /* ScheduleWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0AB766E105499AD9AD1FD0 /* ScheduleWidget.swift */; };
 		DF08B19D39093E1EFE076E52 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33879AD99D2341E40B13612B /* ScheduleView.swift */; };
+		EE397B734E9A5A1FC7193A3C /* SharedModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C463F40566C697DFE005331 /* SharedModelContainer.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D794412A414DC67F7ED486CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B584FAEFB92DA0F00FCE4A3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3431CEEB8893E043302A3756;
+			remoteInfo = MyScheduleWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3C70FE404EDF364B75294A83 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				903E938E71FFEB3A3FC4B759 /* MyScheduleWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		01B9A9408AACDBF943E4CD09 /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
 		06FD9ABF642466922E724BCA /* MyScheduleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScheduleApp.swift; sourceTree = "<group>"; };
 		09D0B71133BFA8FBE1A49187 /* ScheduleParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleParser.swift; sourceTree = "<group>"; };
+		0FBBA20C10F2085CC10EE51A /* MyScheduleWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScheduleWidgetBundle.swift; sourceTree = "<group>"; };
 		13A2AE1AB1E16B27C67E1CA8 /* AddCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseView.swift; sourceTree = "<group>"; };
+		1E0AB766E105499AD9AD1FD0 /* ScheduleWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWidget.swift; sourceTree = "<group>"; };
+		26C4B8370A9C685BFE8229F8 /* MyScheduleWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyScheduleWidget.entitlements; sourceTree = "<group>"; };
 		28D667B2883BECEFCB030AE5 /* MySchedule.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MySchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C463F40566C697DFE005331 /* SharedModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModelContainer.swift; sourceTree = "<group>"; };
 		2E9BE9F7FE35BA0772586D4D /* CalendarExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExporter.swift; sourceTree = "<group>"; };
 		33879AD99D2341E40B13612B /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		34BFD7A3AD9C3D1BF9C2A5FC /* TrustAllCerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustAllCerts.swift; sourceTree = "<group>"; };
@@ -38,16 +74,28 @@
 		8D71CD6DCEA10A9CB3B1AD18 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		AD7AF60396DD615DF636415D /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		BB62694685BB13EC933FEE95 /* CourseBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseBlockView.swift; sourceTree = "<group>"; };
+		BB663427472BAF5DC109DF19 /* WidgetViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViews.swift; sourceTree = "<group>"; };
 		C40331EF31ADFCFA3AEA3E62 /* SectionTimeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTimeSettingView.swift; sourceTree = "<group>"; };
+		D5400A2E8AA8C83A6C72F5BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E25246EDC3E0B53CD153E596 /* MyScheduleWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = MyScheduleWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		2C35DBAC57671719E7F98BCE /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				2C463F40566C697DFE005331 /* SharedModelContainer.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		44B353D575F4937DDC62462B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				D1409149F0868E489DC647FD /* App */,
 				C3D49BB6DB5404C3F671C746 /* Models */,
 				46BC54B583A1EBBB333337FA /* Services */,
+				2C35DBAC57671719E7F98BCE /* Shared */,
 				9C2C66993ED3C397F476311D /* Views */,
 			);
 			path = Sources;
@@ -86,6 +134,18 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		A42E0CC4D1ECA9EE496AA789 /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				D5400A2E8AA8C83A6C72F5BB /* Info.plist */,
+				26C4B8370A9C685BFE8229F8 /* MyScheduleWidget.entitlements */,
+				0FBBA20C10F2085CC10EE51A /* MyScheduleWidgetBundle.swift */,
+				1E0AB766E105499AD9AD1FD0 /* ScheduleWidget.swift */,
+				BB663427472BAF5DC109DF19 /* WidgetViews.swift */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
 		C3D49BB6DB5404C3F671C746 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				28D667B2883BECEFCB030AE5 /* MySchedule.app */,
+				E25246EDC3E0B53CD153E596 /* MyScheduleWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				44B353D575F4937DDC62462B /* Sources */,
+				A42E0CC4D1ECA9EE496AA789 /* Widget */,
 				F6D8FBDB6A0AEFB314654C0A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -127,10 +189,12 @@
 			buildConfigurationList = E8A04A8C8DCD5FF9C1CCE931 /* Build configuration list for PBXNativeTarget "MySchedule" */;
 			buildPhases = (
 				D2D9442157D89FCE57F75C6D /* Sources */,
+				3C70FE404EDF364B75294A83 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0AF2A86954A3CB9A13B2EF0D /* PBXTargetDependency */,
 			);
 			name = MySchedule;
 			packageProductDependencies = (
@@ -138,6 +202,23 @@
 			productName = MySchedule;
 			productReference = 28D667B2883BECEFCB030AE5 /* MySchedule.app */;
 			productType = "com.apple.product-type.application";
+		};
+		3431CEEB8893E043302A3756 /* MyScheduleWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4DF28AAC0DB736E9F2420DA8 /* Build configuration list for PBXNativeTarget "MyScheduleWidgetExtension" */;
+			buildPhases = (
+				11191EE7D85DD635101F0251 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyScheduleWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = MyScheduleWidgetExtension;
+			productReference = E25246EDC3E0B53CD153E596 /* MyScheduleWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -149,6 +230,9 @@
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					2A52C4258A6BDFFE3C5966B4 = {
+						DevelopmentTeam = "";
+					};
+					3431CEEB8893E043302A3756 = {
 						DevelopmentTeam = "";
 					};
 				};
@@ -168,11 +252,25 @@
 			projectRoot = "";
 			targets = (
 				2A52C4258A6BDFFE3C5966B4 /* MySchedule */,
+				3431CEEB8893E043302A3756 /* MyScheduleWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		11191EE7D85DD635101F0251 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F28C48922FBF075B24BABAF /* CourseColor.swift in Sources */,
+				624B4D4A1C88B55A1FD991DD /* Models.swift in Sources */,
+				C914AFFF89918A8CC4048ECC /* MyScheduleWidgetBundle.swift in Sources */,
+				CD3F8CA5C5F85508A2EE57D8 /* ScheduleWidget.swift in Sources */,
+				EE397B734E9A5A1FC7193A3C /* SharedModelContainer.swift in Sources */,
+				B7D677CCA9F40219C3C7C95A /* WidgetViews.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2D9442157D89FCE57F75C6D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -190,19 +288,29 @@
 				63D4DD8F64C08D2AAA66C4F9 /* ScheduleParser.swift in Sources */,
 				DF08B19D39093E1EFE076E52 /* ScheduleView.swift in Sources */,
 				4A1BFF7F32885C95D19E43A9 /* SectionTimeSettingView.swift in Sources */,
+				5E196B3BA48502B81BA5EEC0 /* SharedModelContainer.swift in Sources */,
 				6EFF6F43FF92B47250B1A192 /* TrustAllCerts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0AF2A86954A3CB9A13B2EF0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3431CEEB8893E043302A3756 /* MyScheduleWidgetExtension */;
+			targetProxy = D794412A414DC67F7ED486CC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		092F0567DE6172A2E4998B7F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Resources/MySchedule.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -214,7 +322,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jack.myschedule;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -225,8 +333,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Resources/MySchedule.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -238,8 +347,46 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jack.myschedule;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7C8F9D9FC16FDA978C769EC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_ENTITLEMENTS = Widget/MyScheduleWidget.entitlements;
+				CURRENT_PROJECT_VERSION = 2;
+				INFOPLIST_FILE = Widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jack.myschedule.widget;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		896E33424805A60E68A27494 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_ENTITLEMENTS = Widget/MyScheduleWidget.entitlements;
+				CURRENT_PROJECT_VERSION = 2;
+				INFOPLIST_FILE = Widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jack.myschedule.widget;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -369,6 +516,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4DF28AAC0DB736E9F2420DA8 /* Build configuration list for PBXNativeTarget "MyScheduleWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7C8F9D9FC16FDA978C769EC3 /* Debug */,
+				896E33424805A60E68A27494 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		78C7C65D38561F1C98F31BD3 /* Build configuration list for PBXProject "MySchedule" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
