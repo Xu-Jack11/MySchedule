@@ -26,7 +26,8 @@ struct ScheduleView: View {
     private var calculatedCurrentWeek: Int {
         guard let config = config else { return 1 }
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.day], from: config.startDate, to: Date())
+        let weekOneMonday = config.startDate.mondayOfWeek
+        let components = calendar.dateComponents([.day], from: weekOneMonday, to: Date())
         let days = components.day ?? 0
         let week = (days / 7) + 1
         return max(1, min(week, totalWeeks))
@@ -35,8 +36,9 @@ struct ScheduleView: View {
     private func dateForDay(_ dayOfWeek: Int, inWeek week: Int) -> Date {
         guard let config = config else { return Date() }
         let calendar = Calendar.current
+        let weekOneMonday = config.startDate.mondayOfWeek
         let daysOffset = (week - 1) * 7 + (dayOfWeek - 1)
-        return calendar.date(byAdding: .day, value: daysOffset, to: config.startDate) ?? Date()
+        return calendar.date(byAdding: .day, value: daysOffset, to: weekOneMonday) ?? Date()
     }
 
     private let dayNames = ["一", "二", "三", "四", "五", "六", "日"]
@@ -256,6 +258,7 @@ struct ScheduleView: View {
                     CourseBlockView(
                         courseName: course.name,
                         classroom: schedule.classroom,
+                        teacher: course.teacher,
                         colorHex: course.colorHex
                     )
                     .frame(width: dayWidth - 2, height: height - 2)

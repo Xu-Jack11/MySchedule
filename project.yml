@@ -7,7 +7,7 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.9"
-    DEVELOPMENT_TEAM: ""
+    DEVELOPMENT_TEAM: "9B772P8622"
 targets:
   MySchedule:
     type: application
@@ -18,14 +18,16 @@ targets:
       - Resources
     entitlements:
       path: Resources/MySchedule.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.jack.myschedule
     dependencies:
       - target: MyScheduleWidgetExtension
     settings:
       base:
         INFOPLIST_FILE: Resources/Info.plist
         PRODUCT_BUNDLE_IDENTIFIER: com.jack.myschedule
-        MARKETING_VERSION: "1.1.1"
-        CURRENT_PROJECT_VERSION: "3"
+        MARKETING_VERSION: "1.2.0"
         GENERATE_INFOPLIST_FILE: true
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
         INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
@@ -44,10 +46,12 @@ targets:
         createIntermediateGroups: true
     entitlements:
       path: Widget/MyScheduleWidget.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.jack.myschedule
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.jack.myschedule.widget
-        MARKETING_VERSION: "1.1.1"
-        CURRENT_PROJECT_VERSION: "3"
+        MARKETING_VERSION: "1.2.0"
         INFOPLIST_FILE: Widget/Info.plist
-        CODE_SIGNING_ALLOWED: "NO"
+        CODE_SIGN_STYLE: Automatic

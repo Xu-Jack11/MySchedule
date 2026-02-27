@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct ProfileView: View {
     @Environment(\.modelContext) private var modelContext
@@ -9,6 +10,8 @@ struct ProfileView: View {
     @State private var showClearAlert = false
     @State private var showDatePicker = false
     @State private var selectedDate = Date()
+    @State private var showNonMondayAlert = false
+    @State private var pendingStartDate = Date()
     @State private var showSemesterManager = false
     @State private var showAddSemester = false
 
@@ -130,11 +133,17 @@ struct ProfileView: View {
                         }
                         ToolbarItem(placement: .topBarTrailing) {
                             Button("确定") {
-                                if let config = config {
-                                    config.startDate = selectedDate
-                                    try? modelContext.save()
-                                }
                                 showDatePicker = false
+                                if selectedDate.isMonday {
+                                    if let config = config {
+                                        config.startDate = selectedDate
+                                        try? modelContext.save()
+                                        WidgetCenter.shared.reloadAllTimelines()
+                                    }
+                                } else {
+                                    pendingStartDate = selectedDate
+                                    showNonMondayAlert = true
+                                }
                             }
                             .fontWeight(.semibold)
                         }
@@ -152,6 +161,31 @@ struct ProfileView: View {
                 }
             } message: {
                 Text("确定要删除当前学期的所有课程吗？此操作不可撤销。")
+            }
+            .alert("开学日期不是周一", isPresented: $showNonMondayAlert) {
+                Button("自动调整为周一") {
+                    if let config = config {
+                        config.startDate = pendingStartDate.mondayOfWeek
+                        try? modelContext.save()
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }
+                }
+                Button("保留所选日期") {
+                    if let config = config {
+                        config.startDate = pendingStartDate
+                        try? modelContext.save()
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }
+                }
+                Button("取消", role: .cancel) { }
+            } message: {
+                let monday = pendingStartDate.mondayOfWeek
+                let fmt: (Date) -> String = { d in
+                    let f = DateFormatter()
+                    f.dateFormat = "M月d日"
+                    return f.string(from: d)
+                }
+                Text("您选择的 \(pendingStartDate.chineseWeekdayName)（\(fmt(pendingStartDate))）不是周一。课程表的第一周将以所在周的周一（\(fmt(monday))）为基准对齐。建议自动调整为周一。")
             }
         }
     }

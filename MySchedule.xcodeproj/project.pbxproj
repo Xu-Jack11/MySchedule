@@ -11,6 +11,7 @@
 		139E3414261A6285CDAE58EC /* CourseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BE5FE81AE1A258947D8CDC /* CourseDetailView.swift */; };
 		2650B04CD71E4308DF5470EA /* AddCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A2AE1AB1E16B27C67E1CA8 /* AddCourseView.swift */; };
 		4A1BFF7F32885C95D19E43A9 /* SectionTimeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40331EF31ADFCFA3AEA3E62 /* SectionTimeSettingView.swift */; };
+		58B4F027F523F7B028C01F02 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566908CDC716853436573C51 /* DateUtils.swift */; };
 		5C34D77381EA158907A95BC4 /* CourseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F882D951390A4EFC389A4E /* CourseColor.swift */; };
 		5E196B3BA48502B81BA5EEC0 /* SharedModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C463F40566C697DFE005331 /* SharedModelContainer.swift */; };
 		624B4D4A1C88B55A1FD991DD /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7AF60396DD615DF636415D /* Models.swift */; };
@@ -28,6 +29,7 @@
 		CD310C6DA80CDDDDE94F1C8C /* CourseBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB62694685BB13EC933FEE95 /* CourseBlockView.swift */; };
 		CD3F8CA5C5F85508A2EE57D8 /* ScheduleWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0AB766E105499AD9AD1FD0 /* ScheduleWidget.swift */; };
 		DF08B19D39093E1EFE076E52 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33879AD99D2341E40B13612B /* ScheduleView.swift */; };
+		EB07D5893CF0C3D98A6B2803 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566908CDC716853436573C51 /* DateUtils.swift */; };
 		EE397B734E9A5A1FC7193A3C /* SharedModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C463F40566C697DFE005331 /* SharedModelContainer.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +72,7 @@
 		34BFD7A3AD9C3D1BF9C2A5FC /* TrustAllCerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustAllCerts.swift; sourceTree = "<group>"; };
 		3FE92D12C8BB48811AE4AF34 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		43BE5FE81AE1A258947D8CDC /* CourseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailView.swift; sourceTree = "<group>"; };
+		566908CDC716853436573C51 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		78F882D951390A4EFC389A4E /* CourseColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseColor.swift; sourceTree = "<group>"; };
 		8D71CD6DCEA10A9CB3B1AD18 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		AD7AF60396DD615DF636415D /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 		2C35DBAC57671719E7F98BCE /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				566908CDC716853436573C51 /* DateUtils.swift */,
 				2C463F40566C697DFE005331 /* SharedModelContainer.swift */,
 			);
 			path = Shared;
@@ -230,10 +234,11 @@
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					2A52C4258A6BDFFE3C5966B4 = {
-						DevelopmentTeam = "";
+						DevelopmentTeam = 9B772P8622;
 					};
 					3431CEEB8893E043302A3756 = {
-						DevelopmentTeam = "";
+						DevelopmentTeam = 9B772P8622;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -263,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F28C48922FBF075B24BABAF /* CourseColor.swift in Sources */,
+				EB07D5893CF0C3D98A6B2803 /* DateUtils.swift in Sources */,
 				624B4D4A1C88B55A1FD991DD /* Models.swift in Sources */,
 				C914AFFF89918A8CC4048ECC /* MyScheduleWidgetBundle.swift in Sources */,
 				CD3F8CA5C5F85508A2EE57D8 /* ScheduleWidget.swift in Sources */,
@@ -280,6 +286,7 @@
 				CD310C6DA80CDDDDE94F1C8C /* CourseBlockView.swift in Sources */,
 				5C34D77381EA158907A95BC4 /* CourseColor.swift in Sources */,
 				139E3414261A6285CDAE58EC /* CourseDetailView.swift in Sources */,
+				58B4F027F523F7B028C01F02 /* DateUtils.swift in Sources */,
 				87186D0990E8F79A66851F58 /* ImportView.swift in Sources */,
 				AF935D9AD2FC67066114E9CC /* MainTabView.swift in Sources */,
 				C8E94D1631CF2732AAA021DE /* Models.swift in Sources */,
@@ -310,7 +317,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Resources/MySchedule.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -322,7 +329,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jack.myschedule;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -335,7 +342,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Resources/MySchedule.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -347,7 +354,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jack.myschedule;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -357,16 +364,16 @@
 		7C8F9D9FC16FDA978C769EC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGN_ENTITLEMENTS = Widget/MyScheduleWidget.entitlements;
-				CURRENT_PROJECT_VERSION = 2;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				INFOPLIST_FILE = Widget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jack.myschedule.widget;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -376,16 +383,16 @@
 		896E33424805A60E68A27494 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGN_ENTITLEMENTS = Widget/MyScheduleWidget.entitlements;
-				CURRENT_PROJECT_VERSION = 2;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				INFOPLIST_FILE = Widget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jack.myschedule.widget;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -427,7 +434,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 9B772P8622;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -491,7 +498,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 9B772P8622;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

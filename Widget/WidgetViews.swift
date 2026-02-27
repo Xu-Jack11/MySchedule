@@ -45,7 +45,7 @@ struct SmallWidgetView: View {
                         .font(.caption2)
                         .foregroundColor(.secondary)
                     Spacer()
-                    Text(weekdayString())
+                    Text("\(dateString()) \(weekdayString())")
                         .font(.caption2)
                         .foregroundColor(.secondary)
                 }
@@ -60,6 +60,11 @@ struct SmallWidgetView: View {
                                 .font(.subheadline)
                                 .fontWeight(.semibold)
                                 .lineLimit(2)
+                            if !course.teacher.isEmpty {
+                                Text(course.teacher)
+                                    .font(.caption2)
+                                    .foregroundColor(.secondary)
+                            }
                             if !course.classroom.isEmpty {
                                 Text("@\(course.classroom)")
                                     .font(.caption2)
@@ -84,8 +89,28 @@ struct SmallWidgetView: View {
                 Text("第\(entry.currentWeek)周")
                     .font(.caption2)
                     .foregroundColor(.secondary.opacity(0.6))
+                Text(entry.debugInfo)
+                    .font(.system(size: 7))
+                    .foregroundColor(.red.opacity(0.8))
+                    .lineLimit(3)
+                Text("\(dateString()) \(weekdayString())")
+                    .font(.caption2)
+                    .foregroundColor(.secondary.opacity(0.6))
+                Text("AppGroup: \(SharedModelContainer.isAppGroupEnabled ? "ON" : "OFF")")
+                    .font(.caption2)
+                    .foregroundColor(.secondary.opacity(0.6))
+                Text("\(dateString()) \(weekdayString())")
+                    .font(.caption2)
+                    .foregroundColor(.secondary.opacity(0.6))
             }
         }
+    }
+
+    private func dateString() -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "zh_CN")
+        formatter.dateFormat = "MM/dd"
+        return formatter.string(from: entry.date)
     }
 
     private func weekdayString() -> String {
@@ -138,10 +163,24 @@ struct MediumWidgetView: View {
                 .font(.subheadline)
                 .fontWeight(.semibold)
             Spacer()
-            Text("第\(entry.currentWeek)周 · \(entry.todayCourses.count)节课")
+            Text("\(dateString()) \(weekdayString()) · 第\(entry.currentWeek)周")
                 .font(.caption2)
                 .foregroundColor(.secondary)
         }
+    }
+
+    private func dateString() -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "zh_CN")
+        formatter.dateFormat = "MM/dd"
+        return formatter.string(from: entry.date)
+    }
+
+    private func weekdayString() -> String {
+        let calendar = Calendar.current
+        let weekday = calendar.component(.weekday, from: entry.date)
+        let names = ["日", "一", "二", "三", "四", "五", "六"]
+        return "周\(names[weekday - 1])"
     }
 
     private func courseRow(_ course: WidgetCourse) -> some View {
@@ -155,10 +194,18 @@ struct MediumWidgetView: View {
                     .font(.caption)
                     .fontWeight(.medium)
                     .lineLimit(1)
-                Text(course.classroom)
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
-                    .lineLimit(1)
+                HStack(spacing: 4) {
+                    if !course.teacher.isEmpty {
+                        Text(course.teacher)
+                            .lineLimit(1)
+                    }
+                    if !course.classroom.isEmpty {
+                        Text("@\(course.classroom)")
+                            .lineLimit(1)
+                    }
+                }
+                .font(.caption2)
+                .foregroundColor(.secondary)
             }
 
             Spacer()
@@ -182,7 +229,7 @@ struct LargeWidgetView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("今日课程")
                         .font(.headline)
-                    Text("第\(entry.currentWeek)周 · \(weekdayString())")
+                    Text("\(dateString()) · 第\(entry.currentWeek)周 · \(weekdayString())")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -242,14 +289,17 @@ struct LargeWidgetView: View {
                         .font(.subheadline)
                         .fontWeight(.medium)
                         .lineLimit(1)
-                    if !course.classroom.isEmpty {
-                        HStack(spacing: 2) {
-                            Image(systemName: "mappin.circle.fill")
-                                .font(.system(size: 9))
-                            Text(course.classroom)
+                    HStack(spacing: 6) {
+                        if !course.teacher.isEmpty {
+                            Text(course.teacher)
                                 .font(.caption2)
+                                .foregroundColor(.secondary)
                         }
-                        .foregroundColor(.secondary)
+                        if !course.classroom.isEmpty {
+                            Text("@ \(course.classroom)")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
 
@@ -266,6 +316,13 @@ struct LargeWidgetView: View {
         }
     }
 
+    private func dateString() -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "zh_CN")
+        formatter.dateFormat = "MM/dd"
+        return formatter.string(from: entry.date)
+    }
+
     private func weekdayString() -> String {
         let calendar = Calendar.current
         let weekday = calendar.component(.weekday, from: entry.date)
@@ -279,7 +336,7 @@ struct LargeWidgetView: View {
     ScheduleWidget()
 } timeline: {
     ScheduleEntry(date: Date(), todayCourses: [
-        WidgetCourse(id: UUID(), name: "高级程序设计", classroom: "理4-220",
+        WidgetCourse(id: UUID(), name: "高级程序设计", classroom: "理4-220", teacher: "郭鸣",
                     startSection: 1, endSection: 4, startTime: "08:00", endTime: "11:25",
                     colorHex: "#4A90D9", dayOfWeek: 5)
     ], semesterName: "2025-2026学年第二学期", currentWeek: 1)
@@ -289,10 +346,10 @@ struct LargeWidgetView: View {
     ScheduleWidget()
 } timeline: {
     ScheduleEntry(date: Date(), todayCourses: [
-        WidgetCourse(id: UUID(), name: "高级程序设计", classroom: "理4-220",
+        WidgetCourse(id: UUID(), name: "高级程序设计", classroom: "理4-220", teacher: "郭鸣",
                     startSection: 1, endSection: 4, startTime: "08:00", endTime: "11:25",
                     colorHex: "#4A90D9", dayOfWeek: 5),
-        WidgetCourse(id: UUID(), name: "计算机视觉", classroom: "理4-534",
+        WidgetCourse(id: UUID(), name: "计算机视觉", classroom: "理4-534", teacher: "李老师",
                     startSection: 6, endSection: 9, startTime: "13:30", endTime: "16:55",
                     colorHex: "#7BC67E", dayOfWeek: 5)
     ], semesterName: "2025-2026学年第二学期", currentWeek: 1)

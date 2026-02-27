@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct AddCourseView: View {
     @Environment(\.dismiss) private var dismiss
@@ -122,6 +123,7 @@ struct AddCourseView: View {
         )
         modelContext.insert(schedule)
         try? modelContext.save()
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }
 

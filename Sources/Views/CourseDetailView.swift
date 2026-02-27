@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct CourseDetailView: View {
     @Environment(\.dismiss) private var dismiss
@@ -60,6 +61,7 @@ struct CourseDetailView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("完成") {
                         try? modelContext.save()
+                        WidgetCenter.shared.reloadAllTimelines()
                         dismiss()
                     }
                     .fontWeight(.semibold)
@@ -70,6 +72,7 @@ struct CourseDetailView: View {
                 Button("删除", role: .destructive) {
                     modelContext.delete(course)
                     try? modelContext.save()
+                    WidgetCenter.shared.reloadAllTimelines()
                     dismiss()
                 }
             } message: {
