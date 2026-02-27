@@ -8,7 +8,6 @@ struct ScheduleEntry: TimelineEntry {
     let todayCourses: [WidgetCourse]
     let semesterName: String
     let currentWeek: Int
-    var debugInfo: String = ""
 }
 
 struct WidgetCourse: Identifiable {
@@ -67,12 +66,8 @@ struct ScheduleProvider: TimelineProvider {
         let configDescriptor = FetchDescriptor<SemesterConfig>(
             predicate: #Predicate { $0.isActive }
         )
-        let configs = (try? context.fetch(configDescriptor)) ?? []
-        let configCount = (try? context.fetch(FetchDescriptor<SemesterConfig>()))?.count ?? -1
-        guard let config = configs.first else {
-            let url = SharedModelContainer.appGroupURL?.path ?? "nil"
-            return ScheduleEntry(date: date, todayCourses: [], semesterName: "", currentWeek: 0,
-                debugInfo: "No active config (total=\(configCount)) url=...\(url.suffix(30))")
+        guard let config = try? context.fetch(configDescriptor).first else {
+            return ScheduleEntry(date: date, todayCourses: [], semesterName: "", currentWeek: 0)
         }
 
         // 计算当前周次（以开学日所在周的周一为基准）
@@ -124,13 +119,11 @@ struct ScheduleProvider: TimelineProvider {
 
         todayCourses.sort { $0.startSection < $1.startSection }
 
-        let allCount = allCourses.count
         return ScheduleEntry(
             date: date,
             todayCourses: todayCourses,
             semesterName: config.semesterName,
-            currentWeek: currentWeek,
-            debugInfo: "courses=\(allCount) today=\(todayCourses.count) dow=\(todayDayOfWeek)"
+            currentWeek: currentWeek
         )
     }
 }
