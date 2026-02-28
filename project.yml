@@ -28,7 +28,7 @@ targets:
       base:
         INFOPLIST_FILE: Resources/Info.plist
         PRODUCT_BUNDLE_IDENTIFIER: com.jack.myschedule
-        MARKETING_VERSION: "1.2.1"
+        MARKETING_VERSION: "1.2.2"
         GENERATE_INFOPLIST_FILE: true
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
         INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
@@ -53,6 +53,6 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.jack.myschedule.widget
-        MARKETING_VERSION: "1.2.1"
+        MARKETING_VERSION: "1.2.2"
         INFOPLIST_FILE: Widget/Info.plist
         CODE_SIGN_STYLE: Automatic
